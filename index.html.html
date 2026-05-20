@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Cost Estimator · The Prepared Life Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage: #5c6e5b;
+    --sage-light: #8fa48e;
+    --sage-pale: #eef2ed;
+    --sage-mid: #d4ddd3;
+    --terracotta: #b8613a;
+    --terra-light: #f0d5c8;
+    --terra-pale: #faf4f1;
+    --cream: #f7f4ef;
+    --warm-white: #fdfcfa;
+    --ink: #2d2d2a;
+    --ink-mid: #5a5955;
+    --ink-light: #9a9895;
+    --border: #ddd9d3;
+    --shadow: rgba(45,45,42,0.08);
+    --font-display: 'Lora', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--sage);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-header .brand {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .site-header .tagline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, var(--sage-pale) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, var(--terra-light) 0%, transparent 70%);
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--ink-mid);
+    max-width: 480px;
+    margin: 0 auto 28px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .hero-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-mid);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .hero-note::before { content: '🌿'; }
+
+  /* ── MAIN LAYOUT ── */
+  .app-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+
+  /* ── STEP INDICATOR ── */
+  .steps-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 32px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 0;
+  }
+  .step-pill {
+    flex: 1;
+    text-align: center;
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-light);
+    border-right: 1px solid var(--border);
+    transition: all 0.25s;
+    cursor: default;
+    position: relative;
+  }
+  .step-pill:last-child { border-right: none; }
+  .step-pill.active {
+    background: var(--sage);
+    color: #fff;
+  }
+  .step-pill.done {
+    background: var(--sage-pale);
+    color: var(--sage);
+  }
+  .step-pill.done::after {
+    content: ' ✓';
+    font-size: 10px;
+  }
+  .step-num {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 1px;
+    font-family: var(--font-display);
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.35s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .card p.desc {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    margin-bottom: 22px;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .field label span {
+    font-weight: 300;
+    color: var(--ink-light);
+    font-size: 12px;
+  }
+  select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--cream);
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink);
+    appearance: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a5955' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+  select:focus, input:focus {
+    border-color: var(--sage-light);
+    box-shadow: 0 0 0 3px rgba(92,110,91,0.1);
+  }
+
+  /* Radio buttons styled as tiles */
+  .radio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .radio-tile {
+    position: relative;
+  }
+  .radio-tile input {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+  .radio-tile label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--cream);
+    margin: 0;
+  }
+  .radio-tile label .tile-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .radio-tile label .tile-cost {
+    font-size: 12px;
+    color: var(--ink-light);
+    font-weight: 300;
+  }
+  .radio-tile input:checked + label {
+    border-color: var(--sage);
+    background: var(--sage-pale);
+    box-shadow: inset 0 0 0 1px var(--sage);
+  }
+  .radio-tile input:checked + label .tile-name { color: var(--sage); }
+  .radio-tile input:checked + label .tile-cost { color: var(--sage-light); }
+
+  /* ── SLIDER ── */
+  .slider-wrap {
+    position: relative;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--sage-mid);
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--sage);
+    border: 3px solid #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-light);
+    margin-top: 6px;
+  }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-block;
+    background: var(--sage);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 28px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: #4e5f4d; transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    display: inline-block;
+    background: transparent;
+    color: var(--ink-mid);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--cream); border-color: var(--sage-light); color: var(--sage); }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  /* ── RESULTS ── */
+  .results-hero {
+    background: var(--sage);
+    border-radius: 16px;
+    padding: 32px 28px;
+    color: #fff;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease both;
+  }
+  .results-hero::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .results-hero .rh-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .results-hero .rh-amount {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 7vw, 52px);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .results-hero .rh-range {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 300;
+  }
+  .results-hero .rh-care-type {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+  }
+  .results-hero .rh-care-type strong {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .projections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.45s ease 0.05s both;
+  }
+  .proj-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .proj-card .proj-year {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-light);
+    margin-bottom: 6px;
+  }
+  .proj-card .proj-amount {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .proj-card .proj-note {
+    font-size: 11px;
+    color: var(--ink-light);
+  }
+  .proj-card.highlight {
+    border-color: var(--terracotta);
+    background: var(--terra-pale);
+  }
+  .proj-card.highlight .proj-amount { color: var(--terracotta); }
+
+  /* insight cards */
+  .insight-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    animation: fadeUp 0.4s ease both;
+  }
+  .insight-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--sage-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .insight-body { flex: 1; }
+  .insight-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+  .insight-text {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* gap alert */
+  .gap-alert {
+    background: var(--terra-pale);
+    border: 1px solid var(--terra-light);
+    border-left: 4px solid var(--terracotta);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.4s ease 0.1s both;
+  }
+  .gap-alert-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--terracotta);
+    margin-bottom: 5px;
+  }
+  .gap-alert-text {
+    font-size: 13px;
+    color: #7a4530;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* upsell */
+  .upsell {
+    background: linear-gradient(135deg, var(--sage-pale) 0%, var(--terra-pale) 100%);
+    border: 1px solid var(--sage-mid);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin-top: 28px;
+    animation: fadeUp 0.4s ease 0.15s both;
+  }
+  .upsell h3 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .upsell p {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    margin-bottom: 18px;
+    font-weight: 300;
+    line-height: 1.65;
+  }
+  .upsell-products {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .upsell-pill {
+    background: #fff;
+    border: 1px solid var(--sage-mid);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .upsell .btn-primary {
+    background: var(--terracotta);
+  }
+  .upsell .btn-primary:hover { background: #9e5230; }
+
+  /* print section */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-mid);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+    animation: fadeUp 0.4s ease 0.2s both;
+  }
+  .print-bar p {
+    font-size: 13px;
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .print-bar button {
+    background: var(--sage);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+  .print-bar button:hover { background: #4e5f4d; }
+
+  /* hidden step management */
+  .step-panel { display: none; }
+  .step-panel.active { display: block; }
+
+  /* divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  /* footer */
+  .site-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+  }
+  .site-footer strong { color: rgba(255,255,255,0.8); }
+
+  /* print styles */
+  @media print {
+    .site-header, .steps-nav, .btn-row, .upsell, .print-bar, .site-footer { display: none !important; }
+    .card { box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+  }
+
+  @media (max-width: 480px) {
+    .projections-grid { grid-template-columns: 1fr; }
+    .radio-grid { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 32px 16px 28px; }
+    .card { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="brand">The Prepared Life Shop</div>
+    <div class="tagline">Life happens. Best have a plan.</div>
+  </div>
+</header>
+
+<section class="hero">
+  <p class="hero-eyebrow">Free Planning Tool</p>
+  <h1>Care Cost <em>Estimator</em></h1>
+  <p class="hero-sub">Answer a few questions and get a personalized monthly cost estimate — plus a 3-year projection for your family.</p>
+  <span class="hero-note">Takes about 2 minutes</span>
+</section>
+
+<main class="app-shell">
+
+  <!-- Step nav -->
+  <nav class="steps-nav" aria-label="Estimator steps">
+    <div class="step-pill active" id="nav-1"><span class="step-num">1</span>About</div>
+    <div class="step-pill" id="nav-2"><span class="step-num">2</span>Care Needs</div>
+    <div class="step-pill" id="nav-3"><span class="step-num">3</span>Finances</div>
+    <div class="step-pill" id="nav-4"><span class="step-num">4</span>Results</div>
+  </nav>
+
+  <!-- STEP 1: About -->
+  <div class="step-panel active" id="step-1">
+    <div class="card">
+      <p class="card-label">Step 1 of 3</p>
+      <h2>Tell us about your situation</h2>
+      <p class="desc">This helps us give you the most relevant estimate. Everything stays private — nothing is saved or shared.</p>
+
+      <div class="field">
+        <label for="parent-age">Parent or loved one's age <span>(approximate is fine)</span></label>
+        <select id="parent-age">
+          <option value="">Select age range…</option>
+          <option value="65">65–69</option>
+          <option value="70">70–74</option>
+          <option value="75">75–79</option>
+          <option value="80">80–84</option>
+          <option value="85">85–89</option>
+          <option value="90">90+</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Living situation today</label>
+        <div class="radio-grid">
+          <div class="radio-tile">
+            <input type="radio" name="living" id="l1" value="home-alone">
+            <label for="l1"><span class="tile-name">Lives alone</span><span class="tile-cost">Own home</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="living" id="l2" value="home-family">
+            <label for="l2"><span class="tile-name">With family</span><span class="tile-cost">Your home or theirs</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="living" id="l3" value="independent-living">
+            <label for="l3"><span class="tile-name">55+ community</span><span class="tile-cost">Independent living</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="living" id="l4" value="assisted">
+            <label for="l4"><span class="tile-name">Assisted living</span><span class="tile-cost">Currently in facility</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="region">Region <span>(costs vary significantly by area)</span></label>
+        <select id="region">
+          <option value="">Select your region…</option>
+          <option value="0.78">Rural / Small Town</option>
+          <option value="0.92">Midwest / South (lower cost)</option>
+          <option value="1.00">National Average</option>
+          <option value="1.18">Mid-size Metro</option>
+          <option value="1.42">High-cost Metro (NYC, SF, Seattle, Boston)</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" onclick="goToStep(2)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Care Needs -->
+  <div class="step-panel" id="step-2">
+    <div class="card">
+      <p class="card-label">Step 2 of 3</p>
+      <h2>What level of care is needed?</h2>
+      <p class="desc">Choose the care type that best fits the current situation — or the level you're planning toward. You can run the estimator again for different scenarios.</p>
+
+      <div class="field">
+        <label>Care type</label>
+        <div class="radio-grid" style="grid-template-columns: 1fr 1fr;">
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c1" value="companion" data-base="1800">
+            <label for="c1"><span class="tile-name">In-Home Companion</span><span class="tile-cost">~$1,800/mo avg</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c2" value="aide" data-base="2600">
+            <label for="c2"><span class="tile-name">Home Health Aide</span><span class="tile-cost">~$2,600/mo avg</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c3" value="adult-day" data-base="1690">
+            <label for="c3"><span class="tile-name">Adult Day Program</span><span class="tile-cost">~$1,690/mo avg</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c4" value="assisted" data-base="4500">
+            <label for="c4"><span class="tile-name">Assisted Living</span><span class="tile-cost">~$4,500/mo avg</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c5" value="memory" data-base="5800">
+            <label for="c5"><span class="tile-name">Memory Care</span><span class="tile-cost">~$5,800/mo avg</span></label>
+          </div>
+          <div class="radio-tile">
+            <input type="radio" name="care" id="c6" value="skilled" data-base="7900">
+            <label for="c6"><span class="tile-name">Skilled Nursing</span><span class="tile-cost">~$7,900/mo avg</span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field" id="hours-field" style="display:none">
+        <label>Hours of care per week <span id="hours-val">20 hrs/week</span></label>
+        <div class="slider-wrap">
+          <input type="range" min="4" max="40" step="4" value="20" id="hours-slider" oninput="document.getElementById('hours-val').textContent = this.value + ' hrs/week'">
+          <div class="slider-labels"><span>4 hrs</span><span>20 hrs</span><span>40 hrs (full time)</span></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="care-urgency">Timeline <span>(when do you expect to need this?)</span></label>
+        <select id="care-urgency">
+          <option value="now">We need this now</option>
+          <option value="6mo">Within 6 months</option>
+          <option value="1yr">Within a year</option>
+          <option value="planning">Planning ahead (1–3 years)</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+        <button class="btn-primary" onclick="goToStep(3)">Continue →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Finances -->
+  <div class="step-panel" id="step-3">
+    <div class="card">
+      <p class="card-label">Step 3 of 3</p>
+      <h2>Financial picture</h2>
+      <p class="desc">Approximate numbers are perfect — this helps us show your coverage gap or surplus. This data never leaves your browser.</p>
+
+      <div class="field">
+        <label for="monthly-income">Estimated monthly income <span>(Social Security, pension, investments)</span></label>
+        <select id="monthly-income">
+          <option value="0">Not sure yet</option>
+          <option value="1000">Under $1,000/mo</option>
+          <option value="1500">$1,000–$2,000/mo</option>
+          <option value="2500">$2,000–$3,000/mo</option>
+          <option value="3500">$3,000–$4,500/mo</option>
+          <option value="5000">$4,500–$6,000/mo</option>
+          <option value="7000">Over $6,000/mo</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Insurance coverage <span>(select all that apply)</span></label>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px">
+          <label style="display:flex;align-items:center;gap:10px;font-weight:400;margin:0;cursor:pointer">
+            <input type="checkbox" id="ins-medicare" value="400" style="width:16px;height:16px;flex-shrink:0;cursor:pointer"> Medicare (covers limited skilled nursing, not long-term care)
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-weight:400;margin:0;cursor:pointer">
+            <input type="checkbox" id="ins-medicaid" value="3000" style="width:16px;height:16px;flex-shrink:0;cursor:pointer"> Medicaid (may cover long-term care if eligible)
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-weight:400;margin:0;cursor:pointer">
+            <input type="checkbox" id="ins-ltc" value="2500" style="width:16px;height:16px;flex-shrink:0;cursor:pointer"> Long-Term Care Insurance
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-weight:400;margin:0;cursor:pointer">
+            <input type="checkbox" id="ins-va" value="2000" style="width:16px;height:16px;flex-shrink:0;cursor:pointer"> VA Benefits (veteran)
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;font-weight:400;margin:0;cursor:pointer">
+            <input type="checkbox" id="ins-none" value="0" style="width:16px;height:16px;flex-shrink:0;cursor:pointer"> None of the above / not sure
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="family-contrib">Monthly family contribution available <span>(if any)</span></label>
+        <select id="family-contrib">
+          <option value="0">None / not applicable</option>
+          <option value="250">$250/mo</option>
+          <option value="500">$500/mo</option>
+          <option value="1000">$1,000/mo</option>
+          <option value="1500">$1,500/mo</option>
+          <option value="2000">$2,000+/mo</option>
+        </select>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+        <button class="btn-primary" onclick="calculate()">Calculate my estimate →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Results -->
+  <div class="step-panel" id="step-4">
+
+    <div class="print-bar">
+      <p>🖨️ Save or print your estimate for family planning</p>
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+
+    <!-- Main cost result -->
+    <div class="results-hero" id="result-main">
+      <p class="rh-label">Estimated monthly cost</p>
+      <div class="rh-amount" id="result-amount">$0</div>
+      <div class="rh-range" id="result-range">Low–high range</div>
+      <div class="rh-care-type" id="result-care-type">Care type · Region</div>
+    </div>
+
+    <!-- 3-year projections -->
+    <div class="projections-grid" id="projections">
+      <div class="proj-card">
+        <div class="proj-year">Year 1 total</div>
+        <div class="proj-amount" id="yr1">—</div>
+        <div class="proj-note">at today's costs</div>
+      </div>
+      <div class="proj-card highlight">
+        <div class="proj-year">Year 2 total</div>
+        <div class="proj-amount" id="yr2">—</div>
+        <div class="proj-note">+4% annual increase</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-year">Year 3 total</div>
+        <div class="proj-amount" id="yr3">—</div>
+        <div class="proj-note">+4% annual increase</div>
+      </div>
+    </div>
+
+    <!-- Coverage gap -->
+    <div class="gap-alert" id="gap-section">
+      <div class="gap-alert-title" id="gap-title">Estimated monthly gap</div>
+      <div class="gap-alert-text" id="gap-text"></div>
+    </div>
+
+    <!-- Insight cards -->
+    <div id="insights-container"></div>
+
+    <!-- Divider -->
+    <hr class="divider">
+
+    <!-- Upsell -->
+    <div class="upsell">
+      <h3>Ready to build the full plan?</h3>
+      <p>This estimate is the starting point. The Elder Care Financial Planner gives you a complete 6-tab system to track income, insurance, assets, and monthly expenses — so your family has everything in one place.</p>
+      <div class="upsell-products">
+        <span class="upsell-pill">Elder Care Financial Planner · $17.99</span>
+        <span class="upsell-pill">Aging Parents Care Bundle · $17.99</span>
+        <span class="upsell-pill">Dementia Care Planner · $12</span>
+      </div>
+      <a href="https://www.etsy.com/shop/ThePreparedLifeShop" target="_blank" rel="noopener">
+        <button class="btn-primary">Visit The Prepared Life Shop on Etsy →</button>
+      </a>
+    </div>
+
+    <div class="btn-row" style="margin-top:20px">
+      <button class="btn-secondary" onclick="goToStep(1); resetForm()">Start over with new numbers</button>
+    </div>
+
+    <p style="font-size:11px;color:var(--ink-light);margin-top:20px;line-height:1.6;text-align:center">
+      Estimates based on Genworth Annual Cost of Care Survey national averages. Regional multipliers are approximate. Costs vary significantly by provider and location. This tool is for planning purposes only and does not constitute financial or medical advice.
+    </p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <strong>The Prepared Life Shop</strong> · Yale, Michigan · Life happens. Best have a plan.
+</footer>
+
+<script>
+  const CARE_TYPES = {
+    companion:  { name: 'In-Home Companion / Homemaker', base: 1800 },
+    aide:       { name: 'Home Health Aide',               base: 2600 },
+    'adult-day':{ name: 'Adult Day Program',              base: 1690 },
+    assisted:   { name: 'Assisted Living Facility',       base: 4500 },
+    memory:     { name: 'Memory Care Unit',               base: 5800 },
+    skilled:    { name: 'Skilled Nursing Facility',       base: 7900 },
+  };
+
+  const REGION_LABELS = {
+    '0.78': 'Rural / Small Town',
+    '0.92': 'Midwest / South',
+    '1.00': 'National Average',
+    '1.18': 'Mid-size Metro',
+    '1.42': 'High-cost Metro',
+  };
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString();
+  }
+
+  function goToStep(n) {
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    document.querySelectorAll('.step-pill').forEach((p, i) => {
+      p.classList.remove('active', 'done');
+      if (i + 1 < n) p.classList.add('done');
+      if (i + 1 === n) p.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetForm() {
+    document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+    document.getElementById('hours-slider').value = 20;
+    document.getElementById('hours-val').textContent = '20 hrs/week';
+    document.getElementById('hours-field').style.display = 'none';
+  }
+
+  // Show hours slider for in-home / aide
+  document.querySelectorAll('input[name="care"]').forEach(r => {
+    r.addEventListener('change', function() {
+      const showHours = ['companion','aide','adult-day'].includes(this.value);
+      document.getElementById('hours-field').style.display = showHours ? 'block' : 'none';
+    });
+  });
+
+  function calculate() {
+    // Collect values
+    const careRadio = document.querySelector('input[name="care"]:checked');
+    if (!careRadio) { alert('Please select a care type in Step 2.'); goToStep(2); return; }
+    const careType = CARE_TYPES[careRadio.value];
+    const regionVal = parseFloat(document.getElementById('region').value) || 1.0;
+    const regionLabel = REGION_LABELS[String(document.getElementById('region').value)] || 'National Average';
+
+    // Hours adjustment for in-home types
+    let hoursMultiplier = 1;
+    if (['companion','aide','adult-day'].includes(careRadio.value)) {
+      const hrs = parseInt(document.getElementById('hours-slider').value);
+      hoursMultiplier = hrs / 20; // baseline is 20 hrs/week
+    }
+
+    const baseCost = careType.base * regionVal * hoursMultiplier;
+    const low = Math.round(baseCost * 0.82);
+    const high = Math.round(baseCost * 1.22);
+    const mid = Math.round((low + high) / 2);
+
+    // Income & coverage
+    const income = parseInt(document.getElementById('monthly-income').value) || 0;
+    let insuranceCoverage = 0;
+    ['ins-medicare','ins-medicaid','ins-ltc','ins-va'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el.checked) insuranceCoverage += parseInt(el.value);
+    });
+    const familyContrib = parseInt(document.getElementById('family-contrib').value) || 0;
+    const totalCoverage = income + insuranceCoverage + familyContrib;
+    const gap = mid - totalCoverage;
+
+    // Year projections (4% annual care inflation)
+    const yr1 = mid * 12;
+    const yr2 = Math.round(mid * 1.04) * 12;
+    const yr3 = Math.round(mid * 1.04 * 1.04) * 12;
+
+    // Populate results
+    document.getElementById('result-amount').textContent = fmt(mid);
+    document.getElementById('result-range').textContent = 'Estimated range: ' + fmt(low) + ' – ' + fmt(high) + ' per month';
+    document.getElementById('result-care-type').textContent = careType.name + ' · ' + regionLabel;
+    document.getElementById('yr1').textContent = fmt(yr1);
+    document.getElementById('yr2').textContent = fmt(yr2);
+    document.getElementById('yr3').textContent = fmt(yr3);
+
+    // Gap section
+    const gapSection = document.getElementById('gap-section');
+    const gapTitle = document.getElementById('gap-title');
+    const gapText = document.getElementById('gap-text');
+    if (income === 0 && insuranceCoverage === 0) {
+      gapSection.style.display = 'none';
+    } else {
+      gapSection.style.display = 'block';
+      if (gap > 0) {
+        gapTitle.textContent = 'Estimated monthly gap: ' + fmt(gap);
+        gapText.innerHTML = 'Based on the income and coverage you entered, there may be an estimated <strong>' + fmt(gap) + '/month shortfall</strong>. This is common — most families need to plan for some out-of-pocket costs. The Elder Care Financial Planner can help you build a full picture.';
+        gapSection.style.borderLeftColor = '#b8613a';
+        gapSection.style.background = 'var(--terra-pale)';
+        gapSection.style.borderColor = 'var(--terra-light)';
+        gapSection.style.borderLeftColor = 'var(--terracotta)';
+      } else {
+        gapTitle.textContent = 'Coverage looks sufficient';
+        gapText.innerHTML = 'Based on what you entered, your income and coverage may be enough to cover this level of care. That\'s a great position to be in. Still — having a documented financial plan ensures your whole family understands the picture.';
+        gapSection.style.background = 'var(--sage-pale)';
+        gapSection.style.borderColor = 'var(--sage-mid)';
+        gapSection.style.borderLeftColor = 'var(--sage)';
+        gapText.style.color = 'var(--sage)';
+        gapTitle.style.color = 'var(--sage)';
+      }
+    }
+
+    // Dynamic insights
+    const container = document.getElementById('insights-container');
+    container.innerHTML = '';
+    const insights = [];
+
+    const urgency = document.getElementById('care-urgency').value;
+    if (urgency === 'now' || urgency === '6mo') {
+      insights.push({ icon: '⏱️', title: 'Planning under time pressure', text: 'When care is needed soon, having financial documents organized becomes urgent. Families who plan ahead spend 30% less time on logistics during a crisis.' });
+    }
+
+    if (careRadio.value === 'memory' || careRadio.value === 'skilled') {
+      insights.push({ icon: '📋', title: 'Document review is critical now', text: 'At this level of care, legal documents — Power of Attorney, healthcare proxy, advance directive — are frequently needed. Make sure these are signed and accessible.' });
+    }
+
+    if (careRadio.value === 'companion' || careRadio.value === 'aide') {
+      insights.push({ icon: '🏠', title: 'Home safety matters at this stage', text: 'In-home care works best in a safe environment. A room-by-room safety walkthrough can identify fall risks and simple modifications before care begins.' });
+    }
+
+    insights.push({ icon: '📈', title: 'Care costs rise about 4% per year', text: 'Long-term care inflation has consistently outpaced general inflation. Your Year 3 projection above reflects this — planning for increases now prevents surprises later.' });
+
+    if (gap > 1500) {
+      insights.push({ icon: '💬', title: 'A family conversation can help close the gap', text: 'When there\'s a funding shortfall, structured family conversations about shared contributions often reveal resources that weren\'t on the table. A facilitated approach works better than an impromptu discussion.' });
+    }
+
+    insights.forEach((ins, i) => {
+      container.innerHTML += `
+        <div class="insight-card" style="animation-delay:${i * 0.06}s">
+          <div class="insight-icon">${ins.icon}</div>
+          <div class="insight-body">
+            <div class="insight-title">${ins.title}</div>
+            <div class="insight-text">${ins.text}</div>
+          </div>
+        </div>`;
+    });
+
+    goToStep(4);
+  }
+</script>
+</body>
+</html>
