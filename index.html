@@ -57,7 +57,7 @@
     line-height: 1.6;
   }
 
-  /* ââ HEADER ââ */
+  /* ── HEADER ── */
   .site-header {
     background: var(--sage);
     padding: 14px 24px;
@@ -78,7 +78,7 @@
     letter-spacing: 0.04em;
   }
 
-  /* ââ HERO ââ */
+  /* ── HERO ── */
   .hero {
     background: var(--warm-white);
     border-bottom: 1px solid var(--border);
@@ -144,16 +144,16 @@
     color: var(--sage);
     font-weight: 500;
   }
-  .hero-note::before { content: 'ð¿'; }
+  .hero-note::before { content: '🌿'; }
 
-  /* ââ MAIN LAYOUT ââ */
+  /* ── MAIN LAYOUT ── */
   .app-shell {
     max-width: 760px;
     margin: 0 auto;
     padding: 32px 20px 64px;
   }
 
-  /* ââ STEP INDICATOR ââ */
+  /* ── STEP INDICATOR ── */
   .steps-nav {
     display: flex;
     align-items: center;
@@ -187,7 +187,7 @@
     color: var(--sage);
   }
   .step-pill.done::after {
-    content: ' â';
+    content: ' ✓';
     font-size: 10px;
   }
   .step-num {
@@ -198,7 +198,7 @@
     font-family: var(--font-display);
   }
 
-  /* ââ CARDS ââ */
+  /* ── CARDS ── */
   .card {
     background: var(--warm-white);
     border: 1px solid var(--border);
@@ -234,7 +234,7 @@
     font-weight: 300;
   }
 
-  /* ââ FORM ELEMENTS ââ */
+  /* ── FORM ELEMENTS ── */
   .field { margin-bottom: 18px; }
   .field label {
     display: block;
@@ -312,7 +312,7 @@
   .radio-tile input:checked + label .tile-name { color: var(--sage); }
   .radio-tile input:checked + label .tile-cost { color: var(--sage-light); }
 
-  /* ââ SLIDER ââ */
+  /* ── SLIDER ── */
   .slider-wrap {
     position: relative;
   }
@@ -345,7 +345,7 @@
     margin-top: 6px;
   }
 
-  /* ââ BUTTONS ââ */
+  /* ── BUTTONS ── */
   .btn-primary {
     display: inline-block;
     background: var(--sage);
@@ -385,7 +385,7 @@
     margin-top: 24px;
   }
 
-  /* ââ RESULTS ââ */
+  /* ── RESULTS ── */
   .results-hero {
     background: var(--sage);
     border-radius: 16px;
@@ -695,7 +695,7 @@ pintrk('page');
 <section class="hero">
   <p class="hero-eyebrow">Free Planning Tool</p>
   <h1>Care Cost <em>Estimator</em></h1>
-  <p class="hero-sub">Answer a few questions and get a personalized monthly cost estimate â plus a 3-year projection for your family.</p>
+  <p class="hero-sub">Answer a few questions and get a personalized monthly cost estimate — plus a 3-year projection for your family.</p>
   <span class="hero-note">Takes about 2 minutes</span>
  <p class="trust-signal">Built by family caregivers. Free, private, and honest. Nothing is saved or shared.</p>
 </section>
@@ -715,17 +715,17 @@ pintrk('page');
     <div class="card">
       <p class="card-label">Step 1 of 3</p>
       <h2>Tell us about your situation</h2>
-      <p class="desc">This helps us give you the most relevant estimate. Everything stays private â nothing is saved or shared.</p>
+      <p class="desc">This helps us give you the most relevant estimate. Everything stays private — nothing is saved or shared.</p>
 
       <div class="field">
         <label for="parent-age">Parent or loved one's age <span>(approximate is fine)</span></label>
         <select id="parent-age">
-          <option value="">Select age rangeâ¦</option>
-          <option value="65">65â69</option>
-          <option value="70">70â74</option>
-          <option value="75">75â79</option>
-          <option value="80">80â84</option>
-          <option value="85">85â89</option>
+          <option value="">Select age range…</option>
+          <option value="65">65–69</option>
+          <option value="70">70–74</option>
+          <option value="75">75–79</option>
+          <option value="80">80–84</option>
+          <option value="85">85–89</option>
           <option value="90">90+</option>
         </select>
       </div>
@@ -755,7 +755,7 @@ pintrk('page');
       <div class="field">
         <label for="region">Region <span>(costs vary significantly by area)</span></label>
         <select id="region">
-          <option value="">Select your regionâ¦</option>
+          <option value="">Select your region…</option>
           <option value="0.78">Rural / Small Town</option>
           <option value="0.92">Midwest / South (lower cost)</option>
           <option value="1.00">National Average</option>
@@ -765,7 +765,7 @@ pintrk('page');
       </div>
 
       <div class="btn-row">
-        <button class="btn-primary" onclick="gtag('event','tool_started',{tool_name:'care_cost_estimator'});goToStep(2)">Continue â</button>
+        <button class="btn-primary" onclick="gtag('event','tool_started',{tool_name:'care_cost_estimator'});goToStep(2)">Continue →</button>
       </div>
     </div>
   </div>
@@ -775,7 +775,7 @@ pintrk('page');
     <div class="card">
       <p class="card-label">Step 2 of 3</p>
       <h2>What level of care is needed?</h2>
-      <p class="desc">Choose the care type that best fits the current situation â or the level you're planning toward. You can run the estimator again for different scenarios.</p>
+      <p class="desc">Choose the care type that best fits the current situation — or the level you're planning toward. You can run the estimator again for different scenarios.</p>
 
       <div class="field">
         <label>Care type</label>
@@ -821,13 +821,13 @@ pintrk('page');
           <option value="now">We need this now</option>
           <option value="6mo">Within 6 months</option>
           <option value="1yr">Within a year</option>
-          <option value="planning">Planning ahead (1â3 years)</option>
+          <option value="planning">Planning ahead (1–3 years)</option>
         </select>
       </div>
 
       <div class="btn-row">
-        <button class="btn-secondary" onclick="goToStep(1)">â Back</button>
-        <button class="btn-primary" onclick="goToStep(3)">Continue â</button>
+        <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+        <button class="btn-primary" onclick="goToStep(3)">Continue →</button>
       </div>
     </div>
   </div>
@@ -837,17 +837,17 @@ pintrk('page');
     <div class="card">
       <p class="card-label">Step 3 of 3</p>
       <h2>Financial picture</h2>
-      <p class="desc">Approximate numbers are perfect â this helps us show your coverage gap or surplus. This data never leaves your browser.</p>
+      <p class="desc">Approximate numbers are perfect — this helps us show your coverage gap or surplus. This data never leaves your browser.</p>
 
       <div class="field">
         <label for="monthly-income">Estimated monthly income <span>(Social Security, pension, investments)</span></label>
         <select id="monthly-income">
           <option value="0">Not sure yet</option>
           <option value="1000">Under $1,000/mo</option>
-          <option value="1500">$1,000â$2,000/mo</option>
-          <option value="2500">$2,000â$3,000/mo</option>
-          <option value="3500">$3,000â$4,500/mo</option>
-          <option value="5000">$4,500â$6,000/mo</option>
+          <option value="1500">$1,000–$2,000/mo</option>
+          <option value="2500">$2,000–$3,000/mo</option>
+          <option value="3500">$3,000–$4,500/mo</option>
+          <option value="5000">$4,500–$6,000/mo</option>
           <option value="7000">Over $6,000/mo</option>
         </select>
       </div>
@@ -886,8 +886,8 @@ pintrk('page');
       </div>
 
       <div class="btn-row">
-        <button class="btn-secondary" onclick="goToStep(2)">â Back</button>
-        <button class="btn-primary" onclick="calculate()">Calculate my estimate â</button>
+        <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+        <button class="btn-primary" onclick="calculate()">Calculate my estimate →</button>
       </div>
     </div>
   </div>
@@ -896,7 +896,7 @@ pintrk('page');
   <div class="step-panel" id="step-4">
 
     <div class="print-bar">
-      <p>ð¨ï¸ Save or print your estimate for family planning</p>
+      <p>🖨️ Save or print your estimate for family planning</p>
       <button onclick="window.print()">Print / Save PDF</button>
     </div>
 
@@ -904,25 +904,25 @@ pintrk('page');
     <div class="results-hero" id="result-main">
       <p class="rh-label">Estimated monthly cost</p>
       <div class="rh-amount" id="result-amount">$0</div>
-      <div class="rh-range" id="result-range">Lowâhigh range</div>
-      <div class="rh-care-type" id="result-care-type">Care type Â· Region</div>
+      <div class="rh-range" id="result-range">Low–high range</div>
+      <div class="rh-care-type" id="result-care-type">Care type · Region</div>
     </div>
 
     <!-- 3-year projections -->
     <div class="projections-grid" id="projections">
       <div class="proj-card">
         <div class="proj-year">Year 1 total</div>
-        <div class="proj-amount" id="yr1">â</div>
+        <div class="proj-amount" id="yr1">—</div>
         <div class="proj-note">at today's costs</div>
       </div>
       <div class="proj-card highlight">
         <div class="proj-year">Year 2 total</div>
-        <div class="proj-amount" id="yr2">â</div>
+        <div class="proj-amount" id="yr2">—</div>
         <div class="proj-note">+4% annual increase</div>
       </div>
       <div class="proj-card">
         <div class="proj-year">Year 3 total</div>
-        <div class="proj-amount" id="yr3">â</div>
+        <div class="proj-amount" id="yr3">—</div>
         <div class="proj-note">+4% annual increase</div>
       </div>
     </div>
@@ -943,7 +943,7 @@ pintrk('page');
     <div class="upsell">
      <div class="results-emotional">
 
-  <p class="results-acknowledge">If your number felt bigger than you expected â that's normal. Most families are.</p>
+  <p class="results-acknowledge">If your number felt bigger than you expected — that's normal. Most families are.</p>
 
   <p>The gap between what care costs and what's available isn't a failure of planning. It's a reflection of a system that wasn't designed to make this easy. You're not behind. You just now have a real number to work with instead of a worry with no shape.</p>
 
@@ -955,13 +955,13 @@ pintrk('page');
 
   <p><strong>If you have a gap:</strong> The earlier your family sees this number, the more options you have. Long-term care insurance, asset planning, family contribution conversations, and Medicaid planning all take time. The families who navigate this best are the ones who started the conversation before they had to.</p>
 
-  <p><strong>If you have a surplus:</strong> That's good news â and it's worth protecting. Knowing your coverage now means you can make decisions from a position of strength rather than scrambling when circumstances change.</p>
+  <p><strong>If you have a surplus:</strong> That's good news — and it's worth protecting. Knowing your coverage now means you can make decisions from a position of strength rather than scrambling when circumstances change.</p>
 
   <p><strong>Either way:</strong> This number belongs in a family conversation. Print it. Save it. Bring it to a sibling meeting. The worst thing you can do with it is close this tab and go back to not knowing.</p>
 
   <hr class="results-divider">
 
-  <p class="results-permission"><em>You're not selfish for thinking about the financial impact on your family. You're being honest about something most people are afraid to say out loud. The cost of caring for a parent is real. The worry it creates is real. And facing it â even when the number is hard â is an act of love, not a betrayal of it.</em></p>
+  <p class="results-permission"><em>You're not selfish for thinking about the financial impact on your family. You're being honest about something most people are afraid to say out loud. The cost of caring for a parent is real. The worry it creates is real. And facing it — even when the number is hard — is an act of love, not a betrayal of it.</em></p>
 
   <hr class="results-divider">
 
@@ -969,7 +969,7 @@ pintrk('page');
 
   <ul class="next-steps">
     <li>Have the first conversation with your parent about their wishes</li>
-    <li>Locate legal documents â POA, will, advance directive</li>
+    <li>Locate legal documents — POA, will, advance directive</li>
     <li>Review insurance policies and coverage gaps</li>
     <li>Estimate what family contribution is realistic</li>
     <li>Create an emergency contact and medical information sheet</li>
@@ -980,35 +980,35 @@ pintrk('page');
 
   <h3>Your next step starts here.</h3>
 
-  <p>This estimate shows you the gap. The tools below help you close it â by getting your family's full financial picture organized, documented, and ready for whatever comes next.</p>
+  <p>This estimate shows you the gap. The tools below help you close it — by getting your family's full financial picture organized, documented, and ready for whatever comes next.</p>
 
   <div class="product-cards">
 
     <div class="product-card">
-      <h4>Elder Care Financial Planner â $11</h4>
-      <p>A 6-tab Excel and Google Sheets system built for families managing a parent's finances. Budget tracker, insurance log, asset inventory, care cost projector, daily care log, and medication schedule. Formulas built in â just fill it in.</p>
+      <h4>Elder Care Financial Planner — $11</h4>
+      <p>A 6-tab Excel and Google Sheets system built for families managing a parent's finances. Budget tracker, insurance log, asset inventory, care cost projector, daily care log, and medication schedule. Formulas built in — just fill it in.</p>
       <p><em>This is where your estimate becomes a plan.</em></p>
     </div>
 
     <div class="product-card">
-      <h4>Aging Parents Care Bundle â $17.99</h4>
-      <p>The complete system â care planner, financial tracker, and caregiver pocket guide. Everything your family needs in one download.</p>
+      <h4>Aging Parents Care Bundle — $17.99</h4>
+      <p>The complete system — care planner, financial tracker, and caregiver pocket guide. Everything your family needs in one download.</p>
       <p><em>Best value if you're starting from scratch.</em></p>
     </div>
 
     <div class="product-card">
-      <h4>Dementia Caregiver Planner â $14.99</h4>
+      <h4>Dementia Caregiver Planner — $14.99</h4>
       <p>If memory care was part of your estimate, this planner was built for exactly where you are. 38 guided pages covering understanding, tracking, planning, and connecting.</p>
       <p><em>For the family who sees the changes and doesn't know what comes next.</em></p>
     </div>
 
   </div>
 
-  <a href="https://www.etsy.com/shop/ThePreparedLifeShop" class="etsy-button" target="_blank">Visit The Prepared Life Shop on Etsy â</a>
+  <a href="https://www.etsy.com/shop/ThePreparedLifeShop" class="etsy-button" target="_blank">Visit The Prepared Life Shop on Etsy →</a>
 
   <hr class="results-divider">
 
-  <p class="results-closing"><em>The number you just saw is the beginning of a plan â not the end of one. You found this tool because you're the kind of person who faces hard things. That matters more than the number.</em></p>
+  <p class="results-closing"><em>The number you just saw is the beginning of a plan — not the end of one. You found this tool because you're the kind of person who faces hard things. That matters more than the number.</em></p>
 
 </div>
 
@@ -1024,7 +1024,7 @@ pintrk('page');
 </main>
 
 <footer class="site-footer">
-  <strong>The Prepared Life Shop</strong> Â· Yale, Michigan Â· Life happens. Best have a plan.
+  <strong>The Prepared Life Shop</strong> · Yale, Michigan · Life happens. Best have a plan.
 </footer>
 
 <script>
@@ -1117,8 +1117,8 @@ pintrk('page');
 
     // Populate results
     document.getElementById('result-amount').textContent = fmt(mid);
-    document.getElementById('result-range').textContent = 'Estimated range: ' + fmt(low) + ' â ' + fmt(high) + ' per month';
-    document.getElementById('result-care-type').textContent = careType.name + ' Â· ' + regionLabel;
+    document.getElementById('result-range').textContent = 'Estimated range: ' + fmt(low) + ' – ' + fmt(high) + ' per month';
+    document.getElementById('result-care-type').textContent = careType.name + ' · ' + regionLabel;
     document.getElementById('yr1').textContent = fmt(yr1);
     document.getElementById('yr2').textContent = fmt(yr2);
     document.getElementById('yr3').textContent = fmt(yr3);
@@ -1133,14 +1133,14 @@ pintrk('page');
       gapSection.style.display = 'block';
       if (gap > 0) {
         gapTitle.textContent = 'Estimated monthly gap: ' + fmt(gap);
-        gapText.innerHTML = 'Based on the income and coverage you entered, there may be an estimated <strong>' + fmt(gap) + '/month shortfall</strong>. This is common â most families need to plan for some out-of-pocket costs. The Elder Care Financial Planner can help you build a full picture.';
+        gapText.innerHTML = 'Based on the income and coverage you entered, there may be an estimated <strong>' + fmt(gap) + '/month shortfall</strong>. This is common — most families need to plan for some out-of-pocket costs. The Elder Care Financial Planner can help you build a full picture.';
         gapSection.style.borderLeftColor = '#b8613a';
         gapSection.style.background = 'var(--terra-pale)';
         gapSection.style.borderColor = 'var(--terra-light)';
         gapSection.style.borderLeftColor = 'var(--terracotta)';
       } else {
         gapTitle.textContent = 'Coverage looks sufficient';
-        gapText.innerHTML = 'Based on what you entered, your income and coverage may be enough to cover this level of care. That\'s a great position to be in. Still â having a documented financial plan ensures your whole family understands the picture.';
+        gapText.innerHTML = 'Based on what you entered, your income and coverage may be enough to cover this level of care. That\'s a great position to be in. Still — having a documented financial plan ensures your whole family understands the picture.';
         gapSection.style.background = 'var(--sage-pale)';
         gapSection.style.borderColor = 'var(--sage-mid)';
         gapSection.style.borderLeftColor = 'var(--sage)';
@@ -1156,21 +1156,21 @@ pintrk('page');
 
     const urgency = document.getElementById('care-urgency').value;
     if (urgency === 'now' || urgency === '6mo') {
-      insights.push({ icon: 'â±ï¸', title: 'Planning under time pressure', text: 'When care is needed soon, having financial documents organized becomes urgent. Families who plan ahead spend 30% less time on logistics during a crisis.' });
+      insights.push({ icon: '⏱️', title: 'Planning under time pressure', text: 'When care is needed soon, having financial documents organized becomes urgent. Families who plan ahead spend 30% less time on logistics during a crisis.' });
     }
 
     if (careRadio.value === 'memory' || careRadio.value === 'skilled') {
-      insights.push({ icon: 'ð', title: 'Document review is critical now', text: 'At this level of care, legal documents â Power of Attorney, healthcare proxy, advance directive â are frequently needed. Make sure these are signed and accessible.' });
+      insights.push({ icon: '📋', title: 'Document review is critical now', text: 'At this level of care, legal documents — Power of Attorney, healthcare proxy, advance directive — are frequently needed. Make sure these are signed and accessible.' });
     }
 
     if (careRadio.value === 'companion' || careRadio.value === 'aide') {
-      insights.push({ icon: 'ð ', title: 'Home safety matters at this stage', text: 'In-home care works best in a safe environment. A room-by-room safety walkthrough can identify fall risks and simple modifications before care begins.' });
+      insights.push({ icon: '🏠', title: 'Home safety matters at this stage', text: 'In-home care works best in a safe environment. A room-by-room safety walkthrough can identify fall risks and simple modifications before care begins.' });
     }
 
-    insights.push({ icon: 'ð', title: 'Care costs rise about 4% per year', text: 'Long-term care inflation has consistently outpaced general inflation. Your Year 3 projection above reflects this â planning for increases now prevents surprises later.' });
+    insights.push({ icon: '📈', title: 'Care costs rise about 4% per year', text: 'Long-term care inflation has consistently outpaced general inflation. Your Year 3 projection above reflects this — planning for increases now prevents surprises later.' });
 
     if (gap > 1500) {
-      insights.push({ icon: 'ð¬', title: 'A family conversation can help close the gap', text: 'When there\'s a funding shortfall, structured family conversations about shared contributions often reveal resources that weren\'t on the table. A facilitated approach works better than an impromptu discussion.' });
+      insights.push({ icon: '💬', title: 'A family conversation can help close the gap', text: 'When there\'s a funding shortfall, structured family conversations about shared contributions often reveal resources that weren\'t on the table. A facilitated approach works better than an impromptu discussion.' });
     }
 
     insights.forEach((ins, i) => {
@@ -1190,7 +1190,7 @@ pintrk('page');
 <footer style="max-width:680px;margin:40px auto 60px;padding:0 20px;">
 <div style="background:#fdfcfa;border:1px solid #ddd9d3;border-radius:16px;padding:28px;">
 <h2 style="font-family:'Lora',Georgia,serif;font-size:19px;font-weight:600;color:#2d2d2a;margin-bottom:6px;">Related Free Tools</h2>
-<p style="font-size:13px;color:#5a5955;font-weight:300;margin-bottom:18px;">More tools from The Prepared Life Shop â life happens, best have a plan.</p>
+<p style="font-size:13px;color:#5a5955;font-weight:300;margin-bottom:18px;">More tools from The Prepared Life Shop — life happens, best have a plan.</p>
 <div style="display:flex;flex-wrap:wrap;gap:10px;">
 <a href="https://thepreparedlifestore.com/" style="display:inline-block;padding:8px 16px;border:1.5px solid #c4913a;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;color:#2d2d2a;text-decoration:none;">All Free Tools</a>
 <a href="https://thepreparedlifestore.com/home-safety-walkthrough/" style="display:inline-block;padding:8px 16px;border:1.5px solid #c4913a;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;color:#2d2d2a;text-decoration:none;">Home Safety Walkthrough</a>
