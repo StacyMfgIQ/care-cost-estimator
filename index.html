@@ -605,6 +605,35 @@
   }
   .print-bar button:hover { background: #4e5f4d; }
 
+  .worksheet-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--terra-pale);
+    border: 1px solid var(--terra-light);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .worksheet-bar p {
+    font-size: 13px;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  .worksheet-bar a button {
+    background: var(--terracotta);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    cursor: pointer;
+  }
+  .worksheet-bar a button:hover { background: #9e5230; }
+
   /* hidden step management */
   .step-panel { display: none; }
   .step-panel.active { display: block; }
@@ -900,6 +929,11 @@ pintrk('page');
       <button onclick="window.print()">Print / Save PDF</button>
     </div>
 
+    <div class="worksheet-bar">
+      <p>📝 Gathering numbers as a family? Get the full printable worksheet — every line item, including one-time costs this calculator doesn't capture.</p>
+      <a href="https://thepreparedlifestore.com/care-cost-estimator/downloads/eldercare-cost-worksheet.pdf" target="_blank" rel="noopener" onclick="gtag('event','bonus_pdf_click',{tool_name:'care_cost_estimator',bonus:'cost_gathering_worksheet'});"><button>Download Worksheet →</button></a>
+    </div>
+
     <!-- Main cost result -->
     <div class="results-hero" id="result-main">
       <p class="rh-label">Estimated monthly cost</p>
@@ -988,6 +1022,12 @@ pintrk('page');
       <h4>Elder Care Financial Planner — $11</h4>
       <p>A 6-tab Excel and Google Sheets system built for families managing a parent's finances. Budget tracker, insurance log, asset inventory, care cost projector, daily care log, and medication schedule. Formulas built in — just fill it in.</p>
       <p><em>This is where your estimate becomes a plan.</em></p>
+    </div>
+
+    <div class="product-card">
+      <h4>Care Options Comparison Workbook — $12</h4>
+      <p>Side-by-side charts for all six care types, real cost ranges, Medicare/Medicaid notes, touring checklists, and a family decision framework. Includes the "How to Talk to Your Aging Parent" guide.</p>
+      <p><em>Pairs with this estimate — now you know the cost, this helps you choose the setting.</em></p>
     </div>
 
     <div class="product-card">
